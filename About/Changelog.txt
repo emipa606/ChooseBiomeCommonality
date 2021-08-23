@@ -1,4 +1,7 @@
 # Changelog for ChooseBiomeCommonality
 
+1.0.1.0 - Should not cause issues with worldgen if settings has not beed opened
+
+
 1.0.0.0 - First publish
 

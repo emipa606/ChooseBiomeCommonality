@@ -12,7 +12,9 @@ namespace ChooseBiomeCommonality
             }
 
             var fullName = __instance.GetType().FullName;
-            if (fullName == null || !Main.BiomeWorkersDictionary.ContainsKey(fullName))
+            if (fullName == null || !Main.BiomeWorkersDictionary.ContainsKey(fullName) ||
+                !ChooseBiomeCommonality_Mod.instance.Settings.CustomCommonalities.ContainsKey(
+                    Main.BiomeWorkersDictionary[fullName]))
             {
                 return;
             }
