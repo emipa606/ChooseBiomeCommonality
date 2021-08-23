@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <CBC.percent.label>{0} percent</CBC.percent.label>
+  <CBC.version.label>Installed mod-version: {0}</CBC.version.label>
+  <CBC.logging.label>Enable verbose logging</CBC.logging.label>
+  <CBC.logging.tooltip>Shows verbose logging, for finding errors</CBC.logging.tooltip>
+  <CBC.resetall.label>Commonality reset</CBC.resetall.label>
+  <CBC.resetall.tooltip>Reset all commonalities</CBC.resetall.tooltip>
+  <CBC.resetall.button>Reset all</CBC.resetall.button>
+  <CBC.resetall.confirm>This will reset ALL custom commonalities for all biomes</CBC.resetall.confirm>
+</LanguageData>
