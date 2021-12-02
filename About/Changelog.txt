@@ -1,5 +1,8 @@
 # Changelog for ChooseBiomeCommonality
 
+1.0.2.0 - Fixed the scrollview, thanks Taranchuk for the simple solution!
+
+
 1.0.1.0 - Should not cause issues with worldgen if settings has not beed opened
 
 
