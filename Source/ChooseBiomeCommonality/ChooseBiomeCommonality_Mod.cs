@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Mlie;
 using RimWorld;
 using UnityEngine;
@@ -17,6 +18,8 @@ public class ChooseBiomeCommonality_Mod : Mod
 
     private static readonly Vector2 buttonSize = new Vector2(120f, 25f);
 
+    private static readonly Vector2 searchSize = new Vector2(200f, 25f);
+
     private static readonly int buttonSpacer = 200;
 
     private static Listing_Standard listing_Standard;
@@ -25,6 +28,7 @@ public class ChooseBiomeCommonality_Mod : Mod
 
     private static Vector2 scrollPosition;
 
+    private static string searchText = "";
 
     /// <summary>
     ///     The private settings
@@ -90,13 +94,30 @@ public class ChooseBiomeCommonality_Mod : Mod
 
         listing_Standard.CheckboxLabeled("CBC.logging.label".Translate(), ref Settings.VerboseLogging,
             "CBC.logging.tooltip".Translate());
+        Rect lastLabel;
         if (currentVersion != null)
         {
             listing_Standard.Gap();
             GUI.contentColor = Color.gray;
-            listing_Standard.Label("CBC.version.label".Translate(currentVersion));
+            lastLabel = listing_Standard.Label("CBC.version.label".Translate(currentVersion));
             GUI.contentColor = Color.white;
         }
+        else
+        {
+            listing_Standard.Gap();
+            lastLabel = listing_Standard.Label(string.Empty);
+        }
+
+        searchText =
+            Widgets.TextField(
+                new Rect(
+                    lastLabel.position +
+                    new Vector2((rect.width / 2) - (searchSize.x / 2) - (buttonSize.x / 2), 0),
+                    searchSize),
+                searchText);
+        TooltipHandler.TipRegion(new Rect(
+            lastLabel.position + new Vector2((rect.width / 2) - (searchSize.x / 2), 0),
+            searchSize), "CBC.search".Translate());
 
         listing_Standard.End();
 
@@ -114,6 +135,14 @@ public class ChooseBiomeCommonality_Mod : Mod
         tabContentRect.y = 0;
         tabContentRect.width -= 20;
         var allBiomes = Main.AllBiomes;
+        if (!string.IsNullOrEmpty(searchText))
+        {
+            allBiomes = Main.AllBiomes.Where(def =>
+                    def.label.ToLower().Contains(searchText.ToLower()) || def.modContentPack?.Name.ToLower()
+                        .Contains(searchText.ToLower()) == true)
+                .ToList();
+        }
+
         tabContentRect.height = allBiomes.Count * 52f;
         var scrollListing = new Listing_Standard();
         Widgets.BeginScrollView(tabFrameRect, ref scrollPosition, tabContentRect);
@@ -149,8 +178,9 @@ public class ChooseBiomeCommonality_Mod : Mod
             GUI.color = Color.white;
         }
 
+        scrollListing.End();
+
         Widgets.EndScrollView();
-        Settings.Write();
     }
 
     /// <summary>
