@@ -29,6 +29,11 @@ public static class Main
 
             BiomeWorkersDictionary[biomeDef.workerClass.FullName] = biomeDef.defName;
             var original = biomeDef.workerClass.GetMethod("GetScore");
+            if (original == null || original.IsVirtual)
+            {
+                continue;
+            }
+
             LogMessage($"Patching {biomeDef.workerClass}");
             harmony.Patch(original, null, new HarmonyMethod(postfix));
         }
