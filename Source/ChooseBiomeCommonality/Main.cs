@@ -27,12 +27,13 @@ public static class Main
                 continue;
             }
 
-            BiomeWorkersDictionary[biomeDef.workerClass.FullName] = biomeDef.defName;
-            var original = biomeDef.workerClass.GetMethod("GetScore");
-            if (original == null || original.IsVirtual)
+            if (BiomeWorkersDictionary.ContainsKey(biomeDef.workerClass.FullName))
             {
                 continue;
             }
+
+            BiomeWorkersDictionary[biomeDef.workerClass.FullName] = biomeDef.defName;
+            var original = biomeDef.workerClass.GetMethod("GetScore");
 
             LogMessage($"Patching {biomeDef.workerClass}");
             harmony.Patch(original, null, new HarmonyMethod(postfix));

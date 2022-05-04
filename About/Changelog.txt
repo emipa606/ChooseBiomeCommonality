@@ -1,5 +1,8 @@
 # Changelog for ChooseBiomeCommonality
 
+1.3.3 - Fix for the last fix that broke everything
+
+
 1.3.2 - Will no longer throw errors for biomeworkers without the GetScore-method implemented
 
 
