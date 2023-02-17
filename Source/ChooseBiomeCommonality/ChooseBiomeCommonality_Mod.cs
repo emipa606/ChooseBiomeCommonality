@@ -31,11 +31,6 @@ public class ChooseBiomeCommonality_Mod : Mod
     private static string searchText = "";
 
     /// <summary>
-    ///     The private settings
-    /// </summary>
-    private ChooseBiomeCommonality_Settings settings;
-
-    /// <summary>
     ///     Constructor
     /// </summary>
     /// <param name="content"></param>
@@ -43,34 +38,20 @@ public class ChooseBiomeCommonality_Mod : Mod
         : base(content)
     {
         instance = this;
-
-        if (instance.Settings.CustomCommonalities == null)
+        Settings = GetSettings<ChooseBiomeCommonality_Settings>();
+        if (Settings.CustomCommonalities == null)
         {
-            instance.Settings.CustomCommonalities = new Dictionary<string, float>();
+            Settings.CustomCommonalities = new Dictionary<string, float>();
         }
 
         currentVersion =
-            VersionFromManifest.GetVersionFromModMetaData(
-                ModLister.GetActiveModWithIdentifier("Mlie.ChooseBiomeCommonality"));
+            VersionFromManifest.GetVersionFromModMetaData(content.ModMetaData);
     }
 
     /// <summary>
     ///     The instance-settings for the mod
     /// </summary>
-    internal ChooseBiomeCommonality_Settings Settings
-    {
-        get
-        {
-            if (settings == null)
-            {
-                settings = GetSettings<ChooseBiomeCommonality_Settings>();
-            }
-
-            return settings;
-        }
-
-        set => settings = value;
-    }
+    internal ChooseBiomeCommonality_Settings Settings { get; }
 
     /// <summary>
     ///     The settings-window
@@ -149,10 +130,7 @@ public class ChooseBiomeCommonality_Mod : Mod
         scrollListing.Begin(tabContentRect);
         foreach (var biome in allBiomes)
         {
-            if (!instance.Settings.CustomCommonalities.ContainsKey(biome.defName))
-            {
-                instance.Settings.CustomCommonalities[biome.defName] = 1;
-            }
+            instance.Settings.CustomCommonalities.TryAdd(biome.defName, 1);
 
             switch (instance.Settings.CustomCommonalities[biome.defName])
             {
@@ -168,7 +146,7 @@ public class ChooseBiomeCommonality_Mod : Mod
             }
 
             var biomeRect = scrollListing.GetRect(50);
-            instance.Settings.CustomCommonalities[biome.defName] = (float)Math.Round(Widgets.HorizontalSlider(
+            instance.Settings.CustomCommonalities[biome.defName] = (float)Math.Round(Widgets.HorizontalSlider_NewTemp(
                 biomeRect,
                 instance.Settings.CustomCommonalities[biome.defName], 0, 5f, false,
                 "CBC.percent.label".Translate(
