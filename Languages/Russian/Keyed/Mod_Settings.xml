@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+	<CBC.search>Поиск</CBC.search>
+	<CBC.percent.label>{0} процентов</CBC.percent.label>
+	<CBC.version.label>Установленная версия мода: {0}</CBC.version.label>
+	<CBC.logging.label>Включить подробное ведение журнала</CBC.logging.label>
+	<CBC.logging.tooltip>Подробное ведение журнала помогает при отладке мода.</CBC.logging.tooltip>
+	<CBC.resetall.label>Сброс частотности</CBC.resetall.label>
+	<CBC.resetall.tooltip>Сбросить все изменения частотности биомов.</CBC.resetall.tooltip>
+	<CBC.resetall.button>Сбросить все</CBC.resetall.button>
+	<CBC.resetall.confirm>Это приведет к сбросу ВСЕХ пользовательских настроек частотности для всех биомов.</CBC.resetall.confirm>
+</LanguageData>
