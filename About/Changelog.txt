@@ -1,5 +1,8 @@
 # Changelog for ChooseBiomeCommonality
 
+1.4.3 - Updated russian translation by Reiquard
+
+
 1.4.2 - Better save-compatibility, thanks Taranchuk.
 Used DeepL to update translations for ChineseSimplified, French, German, Russian
 
