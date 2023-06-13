@@ -9,4 +9,6 @@
   <CBC.resetall.tooltip>Reset all commonalities</CBC.resetall.tooltip>
   <CBC.resetall.button>Reset all</CBC.resetall.button>
   <CBC.resetall.confirm>This will reset ALL custom commonalities for all biomes</CBC.resetall.confirm>
+  <CBC.configbiomes.tooltip>Configure biome commonalities</CBC.configbiomes.tooltip>
+  <CBC.configbiomes.text>Biome %</CBC.configbiomes.text>
 </LanguageData>

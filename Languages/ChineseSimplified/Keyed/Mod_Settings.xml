@@ -10,4 +10,6 @@
   <CBC.resetall.tooltip>重置所有的共同点</CBC.resetall.tooltip>
   <CBC.resetall.button>重置所有</CBC.resetall.button>
   <CBC.resetall.confirm>这将重置所有生物群落的所有自定义共同点。</CBC.resetall.confirm>
+  <CBC.configbiomes.tooltip>配置生物群落的共同点</CBC.configbiomes.tooltip>
+  <CBC.configbiomes.text>生物群落百分比</CBC.configbiomes.text>
 </LanguageData>

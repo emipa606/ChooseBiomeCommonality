@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using ChooseBiomeCommonality.Settings;
 using HarmonyLib;
 using RimWorld;
@@ -38,6 +39,8 @@ public static class Main
             LogMessage($"Patching {biomeDef.workerClass}");
             harmony.Patch(original, null, new HarmonyMethod(postfix));
         }
+
+        harmony.PatchAll(Assembly.GetExecutingAssembly());
     }
 
     public static List<BiomeDef> AllBiomes

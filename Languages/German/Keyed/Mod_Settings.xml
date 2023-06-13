@@ -10,4 +10,6 @@
   <CBC.resetall.tooltip>Alle Gemeinsamkeiten zurücksetzen</CBC.resetall.tooltip>
   <CBC.resetall.button>Alle zurücksetzen</CBC.resetall.button>
   <CBC.resetall.confirm>Dadurch werden ALLE benutzerdefinierten Gemeinsamkeiten für alle Biome zurückgesetzt</CBC.resetall.confirm>
+  <CBC.configbiomes.tooltip>Gemeinsamkeiten von Biomen konfigurieren</CBC.configbiomes.tooltip>
+  <CBC.configbiomes.text>Biome %</CBC.configbiomes.text>
 </LanguageData>

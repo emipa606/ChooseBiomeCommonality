@@ -10,4 +10,6 @@
   <CBC.resetall.tooltip>Réinitialiser tous les points communs</CBC.resetall.tooltip>
   <CBC.resetall.button>Réinitialiser tout</CBC.resetall.button>
   <CBC.resetall.confirm>Cela réinitialisera TOUS les points communs personnalisés pour tous les biomes.</CBC.resetall.confirm>
+  <CBC.configbiomes.tooltip>Configurer les points communs des biomes</CBC.configbiomes.tooltip>
+  <CBC.configbiomes.text>Biome %</CBC.configbiomes.text>
 </LanguageData>

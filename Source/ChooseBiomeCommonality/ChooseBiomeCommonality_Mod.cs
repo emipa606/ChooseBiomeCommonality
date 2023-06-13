@@ -131,21 +131,8 @@ public class ChooseBiomeCommonality_Mod : Mod
         foreach (var biome in allBiomes)
         {
             instance.Settings.CustomCommonalities.TryAdd(biome.defName, 1);
-
-            switch (instance.Settings.CustomCommonalities[biome.defName])
-            {
-                case > 1:
-                    GUI.color = Color.green;
-                    break;
-                case < 1:
-                    GUI.color = Color.red;
-                    break;
-                default:
-                    GUI.color = Color.white;
-                    break;
-            }
-
             var biomeRect = scrollListing.GetRect(50);
+
             instance.Settings.CustomCommonalities[biome.defName] = (float)Math.Round(Widgets.HorizontalSlider_NewTemp(
                 biomeRect,
                 instance.Settings.CustomCommonalities[biome.defName], 0, 5f, false,
@@ -153,7 +140,6 @@ public class ChooseBiomeCommonality_Mod : Mod
                     Math.Round(instance.Settings.CustomCommonalities[biome.defName] * 100)),
                 biome.LabelCap,
                 biome.modContentPack?.Name), 2);
-            GUI.color = Color.white;
         }
 
         scrollListing.End();
