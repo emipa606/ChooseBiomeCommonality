@@ -1,5 +1,8 @@
 # Changelog for ChooseBiomeCommonality
 
+1.4.5 - Added error-handling when other mods change the biome-worker for biomes. (Regrowth series)
+
+
 1.4.4 - Added biome-button in the world-generation dialog.
 Used DeepL to update translations for ChineseSimplified, French, German, Russian
 

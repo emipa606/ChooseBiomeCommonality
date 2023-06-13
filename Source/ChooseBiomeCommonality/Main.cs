@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -20,24 +21,33 @@ public static class Main
         var harmony = new Harmony("Mlie.ChooseBiomeCommonality");
         var postfix = typeof(BiomeWorker_GetScore).GetMethod("Postfix");
         BiomeWorkersDictionary = new Dictionary<string, string>();
-        foreach (var biomeDef in AllBiomes)
+        for (var index = 0; index < AllBiomes.Count; index++)
         {
-            if (biomeDef.workerClass?.FullName == null)
+            var biomeDef = AllBiomes[index];
+            try
             {
-                LogMessage($"{biomeDef.LabelCap} have no accessable workerClass to patch");
-                continue;
-            }
+                if (biomeDef.workerClass?.FullName == null)
+                {
+                    LogMessage($"{biomeDef.LabelCap} have no accessable workerClass to patch");
+                    continue;
+                }
 
-            if (BiomeWorkersDictionary.ContainsKey(biomeDef.workerClass.FullName))
+                if (BiomeWorkersDictionary.ContainsKey(biomeDef.workerClass.FullName))
+                {
+                    continue;
+                }
+
+                BiomeWorkersDictionary[biomeDef.workerClass.FullName] = biomeDef.defName;
+                var original = biomeDef.workerClass.GetMethod("GetScore");
+
+                LogMessage($"Patching {biomeDef.workerClass}");
+                harmony.Patch(original, null, new HarmonyMethod(postfix));
+            }
+            catch (Exception exception)
             {
-                continue;
+                LogMessage($"Failed to patch {biomeDef}, will not be able to modify that biome: {exception}");
+                AllBiomes.Remove(biomeDef);
             }
-
-            BiomeWorkersDictionary[biomeDef.workerClass.FullName] = biomeDef.defName;
-            var original = biomeDef.workerClass.GetMethod("GetScore");
-
-            LogMessage($"Patching {biomeDef.workerClass}");
-            harmony.Patch(original, null, new HarmonyMethod(postfix));
         }
 
         harmony.PatchAll(Assembly.GetExecutingAssembly());
