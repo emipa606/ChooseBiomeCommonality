@@ -5,6 +5,7 @@ using System.Reflection;
 using ChooseBiomeCommonality.Settings;
 using HarmonyLib;
 using RimWorld;
+using RimWorld.Planet;
 using Verse;
 
 namespace ChooseBiomeCommonality;
@@ -38,7 +39,14 @@ public static class Main
                 }
 
                 BiomeWorkersDictionary[biomeDef.workerClass.FullName] = biomeDef.defName;
-                var original = biomeDef.workerClass.GetMethod("GetScore");
+                var original = biomeDef.workerClass.GetMethod("GetScore", new[] { typeof(Tile), typeof(int) });
+                if (original == null)
+                {
+                    LogMessage(
+                        $"Failed to patch {biomeDef}, will not be able to modify that biome. Could not find biome score-worker.");
+                    AllBiomes.Remove(biomeDef);
+                    continue;
+                }
 
                 LogMessage($"Patching {biomeDef.workerClass}");
                 harmony.Patch(original, null, new HarmonyMethod(postfix));

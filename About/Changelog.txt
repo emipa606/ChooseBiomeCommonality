@@ -1,5 +1,8 @@
 # Changelog for ChooseBiomeCommonality
 
+1.4.6 - Better patch-definitions, thanks Taranchuk!
+
+
 1.4.5 - Added error-handling when other mods change the biome-worker for biomes. (Regrowth series)
 
 
