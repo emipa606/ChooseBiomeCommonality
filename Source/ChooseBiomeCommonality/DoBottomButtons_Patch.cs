@@ -16,7 +16,7 @@ public static class DoBottomButtons_Patch
             return;
         }
 
-        var buttonRect = new Rect(rect.x, pageCreateWorld.windowRect.y - 80f, 150f, 38f);
+        var buttonRect = new Rect(rect.x, rect.y + 80f, 150f, 38f);
         if (Widgets.ButtonText(buttonRect, "CBC.configbiomes.text".Translate()))
         {
             Find.WindowStack.Add(new Dialog_SubModWindow(ChooseBiomeCommonality_Mod.instance));
