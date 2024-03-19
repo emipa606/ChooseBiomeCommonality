@@ -133,7 +133,7 @@ public class ChooseBiomeCommonality_Mod : Mod
             instance.Settings.CustomCommonalities.TryAdd(biome.defName, 1);
             var biomeRect = scrollListing.GetRect(50);
 
-            instance.Settings.CustomCommonalities[biome.defName] = (float)Math.Round(Widgets.HorizontalSlider_NewTemp(
+            instance.Settings.CustomCommonalities[biome.defName] = (float)Math.Round(Widgets.HorizontalSlider(
                 biomeRect,
                 instance.Settings.CustomCommonalities[biome.defName], 0, 5f, false,
                 "CBC.percent.label".Translate(

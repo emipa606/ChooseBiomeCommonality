@@ -1,5 +1,8 @@
 # Changelog for ChooseBiomeCommonality
 
+1.5.0 - Mod updated for 1.5 and passed autotests
+
+
 1.4.7 - Fixed the button-location in the world-gen window
 
 

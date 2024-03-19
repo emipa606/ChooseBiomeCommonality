@@ -22,8 +22,8 @@ public class ChooseBiomeCommonality_Settings : ModSettings
 
     public void ResetManualValues()
     {
-        customCommonalitiesKeys = new List<string>();
-        customCommonalitiesValues = new List<float>();
+        customCommonalitiesKeys = [];
+        customCommonalitiesValues = [];
         CustomCommonalities = new Dictionary<string, float>();
     }
 }

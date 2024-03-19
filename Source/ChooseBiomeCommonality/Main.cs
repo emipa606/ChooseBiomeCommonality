@@ -39,7 +39,7 @@ public static class Main
                 }
 
                 BiomeWorkersDictionary[biomeDef.workerClass.FullName] = biomeDef.defName;
-                var original = biomeDef.workerClass.GetMethod("GetScore", new[] { typeof(Tile), typeof(int) });
+                var original = biomeDef.workerClass.GetMethod("GetScore", [typeof(Tile), typeof(int)]);
                 if (original == null)
                 {
                     LogMessage(

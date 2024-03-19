@@ -11,7 +11,7 @@ public static class DoBottomButtons_Patch
 {
     public static void Postfix(Page __instance, Rect rect)
     {
-        if (__instance is not Page_CreateWorldParams pageCreateWorld)
+        if (__instance is not Page_CreateWorldParams)
         {
             return;
         }
