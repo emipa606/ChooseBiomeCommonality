@@ -5,7 +5,7 @@ namespace ChooseBiomeCommonality;
 
 public class ChooseBiomeCommonality_Settings : ModSettings
 {
-    public Dictionary<string, float> CustomCommonalities = new Dictionary<string, float>();
+    public Dictionary<string, float> CustomCommonalities = new();
     private List<string> customCommonalitiesKeys;
     private List<float> customCommonalitiesValues;
 

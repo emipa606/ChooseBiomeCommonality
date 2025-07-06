@@ -13,14 +13,14 @@ public class BiomeWorker_GetScore
 
         var fullName = __instance.GetType().FullName;
         if (fullName == null || !Main.BiomeWorkersDictionary.ContainsKey(fullName) ||
-            !ChooseBiomeCommonality_Mod.instance.Settings.CustomCommonalities.ContainsKey(
+            !ChooseBiomeCommonality_Mod.Instance.Settings.CustomCommonalities.ContainsKey(
                 Main.BiomeWorkersDictionary[fullName]))
         {
             return;
         }
 
         var multiplier =
-            ChooseBiomeCommonality_Mod.instance.Settings.CustomCommonalities[Main.BiomeWorkersDictionary[fullName]];
+            ChooseBiomeCommonality_Mod.Instance.Settings.CustomCommonalities[Main.BiomeWorkersDictionary[fullName]];
         if (multiplier == 1)
         {
             return;

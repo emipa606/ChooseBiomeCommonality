@@ -39,7 +39,8 @@ public static class Main
                 }
 
                 BiomeWorkersDictionary[biomeDef.workerClass.FullName] = biomeDef.defName;
-                var original = biomeDef.workerClass.GetMethod("GetScore", [typeof(Tile), typeof(int)]);
+                var original =
+                    biomeDef.workerClass.GetMethod("GetScore", [typeof(BiomeDef), typeof(Tile), typeof(PlanetTile)]);
                 if (original == null)
                 {
                     LogMessage(
@@ -85,7 +86,7 @@ public static class Main
             return;
         }
 
-        if (!forced && !ChooseBiomeCommonality_Mod.instance.Settings.VerboseLogging)
+        if (!forced && !ChooseBiomeCommonality_Mod.Instance.Settings.VerboseLogging)
         {
             return;
         }

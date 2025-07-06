@@ -7,7 +7,7 @@ using Verse;
 namespace ChooseBiomeCommonality;
 
 [HarmonyPatch(typeof(Page), "DoBottomButtons")]
-public static class DoBottomButtons_Patch
+public static class Page_DoBottomButtons
 {
     public static void Postfix(Page __instance, Rect rect)
     {
@@ -19,17 +19,17 @@ public static class DoBottomButtons_Patch
         var buttonRect = new Rect(rect.x, rect.y + 80f, 150f, 38f);
         if (Widgets.ButtonText(buttonRect, "CBC.configbiomes.text".Translate()))
         {
-            Find.WindowStack.Add(new Dialog_SubModWindow(ChooseBiomeCommonality_Mod.instance));
+            Find.WindowStack.Add(new DialogSubModWindow(ChooseBiomeCommonality_Mod.Instance));
         }
 
         TooltipHandler.TipRegion(buttonRect, "CBC.configbiomes.tooltip".Translate());
     }
 
-    public class Dialog_SubModWindow : Window
+    private class DialogSubModWindow : Window
     {
         private readonly Mod selMod;
 
-        public Dialog_SubModWindow(Mod mod)
+        public DialogSubModWindow(Mod mod)
         {
             forcePause = true;
             doCloseX = true;
@@ -39,7 +39,7 @@ public static class DoBottomButtons_Patch
             selMod = mod;
         }
 
-        public override Vector2 InitialSize => new Vector2(864f, 584f);
+        public override Vector2 InitialSize => new(864f, 584f);
 
         public override void PreClose()
         {

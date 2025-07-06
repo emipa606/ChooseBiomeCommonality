@@ -11,18 +11,18 @@ namespace ChooseBiomeCommonality.Settings;
 
 public class ChooseBiomeCommonality_Mod : Mod
 {
+    private const int ButtonSpacer = 200;
+
     /// <summary>
     ///     The instance of the settings to be read by the mod
     /// </summary>
-    public static ChooseBiomeCommonality_Mod instance;
+    public static ChooseBiomeCommonality_Mod Instance;
 
-    private static readonly Vector2 buttonSize = new Vector2(120f, 25f);
+    private static readonly Vector2 buttonSize = new(120f, 25f);
 
-    private static readonly Vector2 searchSize = new Vector2(200f, 25f);
+    private static readonly Vector2 searchSize = new(200f, 25f);
 
-    private static readonly int buttonSpacer = 200;
-
-    private static Listing_Standard listing_Standard;
+    private static Listing_Standard listingStandard;
 
     private static string currentVersion;
 
@@ -37,12 +37,9 @@ public class ChooseBiomeCommonality_Mod : Mod
     public ChooseBiomeCommonality_Mod(ModContentPack content)
         : base(content)
     {
-        instance = this;
+        Instance = this;
         Settings = GetSettings<ChooseBiomeCommonality_Settings>();
-        if (Settings.CustomCommonalities == null)
-        {
-            Settings.CustomCommonalities = new Dictionary<string, float>();
-        }
+        Settings.CustomCommonalities ??= new Dictionary<string, float>();
 
         currentVersion =
             VersionFromManifest.GetVersionFromModMetaData(content.ModMetaData);
@@ -61,32 +58,32 @@ public class ChooseBiomeCommonality_Mod : Mod
     {
         base.DoSettingsWindowContents(rect);
 
-        listing_Standard = new Listing_Standard();
-        listing_Standard.Begin(rect);
-        var labelPoint = listing_Standard.Label("CBC.resetall.label".Translate(), -1F,
+        listingStandard = new Listing_Standard();
+        listingStandard.Begin(rect);
+        var labelPoint = listingStandard.Label("CBC.resetall.label".Translate(), -1F,
             "CBC.resetall.tooltip".Translate());
-        DrawButton(() =>
+        drawButton(() =>
             {
                 Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation(
                     "CBC.resetall.confirm".Translate(),
-                    delegate { instance.Settings.ResetManualValues(); }));
+                    delegate { Instance.Settings.ResetManualValues(); }));
             }, "CBC.resetall.button".Translate(),
-            new Vector2(labelPoint.position.x + buttonSpacer, labelPoint.position.y));
+            new Vector2(labelPoint.position.x + ButtonSpacer, labelPoint.position.y));
 
-        listing_Standard.CheckboxLabeled("CBC.logging.label".Translate(), ref Settings.VerboseLogging,
+        listingStandard.CheckboxLabeled("CBC.logging.label".Translate(), ref Settings.VerboseLogging,
             "CBC.logging.tooltip".Translate());
         Rect lastLabel;
         if (currentVersion != null)
         {
-            listing_Standard.Gap();
+            listingStandard.Gap();
             GUI.contentColor = Color.gray;
-            lastLabel = listing_Standard.Label("CBC.version.label".Translate(currentVersion));
+            lastLabel = listingStandard.Label("CBC.version.label".Translate(currentVersion));
             GUI.contentColor = Color.white;
         }
         else
         {
-            listing_Standard.Gap();
-            lastLabel = listing_Standard.Label(string.Empty);
+            listingStandard.Gap();
+            lastLabel = listingStandard.Label(string.Empty);
         }
 
         searchText =
@@ -100,11 +97,11 @@ public class ChooseBiomeCommonality_Mod : Mod
             lastLabel.position + new Vector2((rect.width / 2) - (searchSize.x / 2), 0),
             searchSize), "CBC.search".Translate());
 
-        listing_Standard.End();
+        listingStandard.End();
 
         var scrollContainer = rect.ContractedBy(10);
-        scrollContainer.height -= listing_Standard.CurHeight;
-        scrollContainer.y += listing_Standard.CurHeight;
+        scrollContainer.height -= listingStandard.CurHeight;
+        scrollContainer.y += listingStandard.CurHeight;
         Widgets.DrawBoxSolid(scrollContainer, Color.grey);
         var innerContainer = scrollContainer.ContractedBy(1);
         Widgets.DrawBoxSolid(innerContainer, new ColorInt(42, 43, 44).ToColor);
@@ -130,14 +127,14 @@ public class ChooseBiomeCommonality_Mod : Mod
         scrollListing.Begin(tabContentRect);
         foreach (var biome in allBiomes)
         {
-            instance.Settings.CustomCommonalities.TryAdd(biome.defName, 1);
+            Instance.Settings.CustomCommonalities.TryAdd(biome.defName, 1);
             var biomeRect = scrollListing.GetRect(50);
 
-            instance.Settings.CustomCommonalities[biome.defName] = (float)Math.Round(Widgets.HorizontalSlider(
+            Instance.Settings.CustomCommonalities[biome.defName] = (float)Math.Round(Widgets.HorizontalSlider(
                 biomeRect,
-                instance.Settings.CustomCommonalities[biome.defName], 0, 5f, false,
+                Instance.Settings.CustomCommonalities[biome.defName], 0, 5f, false,
                 "CBC.percent.label".Translate(
-                    Math.Round(instance.Settings.CustomCommonalities[biome.defName] * 100)),
+                    Math.Round(Instance.Settings.CustomCommonalities[biome.defName] * 100)),
                 biome.LabelCap,
                 biome.modContentPack?.Name), 2);
         }
@@ -157,7 +154,7 @@ public class ChooseBiomeCommonality_Mod : Mod
     }
 
 
-    private static void DrawButton(Action action, string text, Vector2 pos)
+    private static void drawButton(Action action, string text, Vector2 pos)
     {
         var rect = new Rect(pos.x, pos.y, buttonSize.x, buttonSize.y);
         if (!Widgets.ButtonText(rect, text, true, false, Color.white))
